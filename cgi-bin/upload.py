@@ -25,6 +25,7 @@ except ImportError:
     pass
 
 UPLOAD_DIR = "tmp"
+IMAGE ='none'
 
 HTML_TEMPLATE = """<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html><head><title>File Upload</title>
@@ -37,7 +38,7 @@ File name: <input name="file_1" type="file"><br>
 </body>
 </html>"""
 
-image ='none'
+
 
 def print_html_form ():
     """This prints out the html form. Note that the action is set to
@@ -61,9 +62,8 @@ def save_uploaded_file (form_field, upload_dir):
     fileitem = form[form_field]
     if not fileitem.file: return
     fout = file (os.path.join(upload_dir, fileitem.filename), 'wb')
-    global image
-    image = str(upload_dir)+"\\"+str(fileitem.filename)
-    print image+"ooo"
+    global IMAGE
+    IMAGE = str(upload_dir)+"\\"+str(fileitem.filename)
 
     while 1:
         chunk = fileitem.file.read(100000)
@@ -85,5 +85,5 @@ def delete (image):
 
 save_uploaded_file ("file_1", UPLOAD_DIR)
 print_html_form ()
-getDimensions(image)
-delete(image)
+getDimensions(IMAGE)
+delete(IMAGE)
