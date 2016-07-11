@@ -48,19 +48,17 @@ import dlib
 import glob
 from skimage import io
 
-if len(sys.argv) != 3:
+if len(sys.argv) != 2:
     print(
-        "Give the path to the trained shape predictor model as the first "
-        "argument and then the directory containing the facial images.\n"
+        "Insufficient arguments "
+        "Give the path to the image files'folder.\n"
         "For example, if you are in the python_examples folder then "
         "execute this program by running:\n"
-        "    ./face_landmark_detection.py shape_predictor_68_face_landmarks.dat ../examples/faces\n"
-        "You can download a trained facial shape predictor from:\n"
-        "    http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2")
+        "    ./face_landmark_detection.py ../examples/faces\n")
     exit()
 
-predictor_path = sys.argv[1]
-faces_folder_path = sys.argv[2]
+predictor_path = "..\\dat\\shape_predictor_68_face_landmarks.dat"
+faces_folder_path = sys.argv[1]
 
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor(predictor_path)
