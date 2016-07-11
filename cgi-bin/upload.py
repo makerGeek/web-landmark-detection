@@ -37,6 +37,8 @@ File name: <input name="file_1" type="file"><br>
 </body>
 </html>"""
 
+image ='none'
+
 def print_html_form ():
     """This prints out the html form. Note that the action is set to
       the name of the script which makes this is a self-posting form.
@@ -59,13 +61,29 @@ def save_uploaded_file (form_field, upload_dir):
     fileitem = form[form_field]
     if not fileitem.file: return
     fout = file (os.path.join(upload_dir, fileitem.filename), 'wb')
+    global image
+    image = str(upload_dir)+"\\"+str(fileitem.filename)
+    print image+"ooo"
+
     while 1:
         chunk = fileitem.file.read(100000)
         if not chunk: break
         fout.write (chunk)
     fout.close()
 
-save_uploaded_file ("file_1", UPLOAD_DIR)
+def getDimensions( image ):
+    img=cv2.imread(image,0)
+    # print img
+    height, width = img.shape
+    dimensions ={'height': height, 'width': width}
+    dumped=json.dumps(dimensions)
+    print
+    print dumped
 
+def delete (image):
+     os.remove(image)
+
+save_uploaded_file ("file_1", UPLOAD_DIR)
 print_html_form ()
-print "oooo"
+getDimensions(image)
+delete(image)
