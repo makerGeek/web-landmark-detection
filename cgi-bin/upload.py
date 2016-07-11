@@ -10,6 +10,13 @@ to limit the size and number of files written to the disk.
 import cgi
 import cgitb; cgitb.enable()
 import os, sys
+
+import numpy as np
+import cv2
+import sys
+import json
+import base64
+import os, cgi
 try: # Windows needs stdio set for binary mode.
     import msvcrt
     msvcrt.setmode (0, os.O_BINARY) # stdin  = 0
@@ -61,3 +68,4 @@ def save_uploaded_file (form_field, upload_dir):
 save_uploaded_file ("file_1", UPLOAD_DIR)
 
 print_html_form ()
+print "oooo"
