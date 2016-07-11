@@ -1,0 +1,9 @@
+resolve dependencies:
+*install pip (https://pip.pypa.io/en/stable/installing/)
+*install dlib ( pip install dlib)
+*install scikit-image (pip install SomePackage-1.0-py2.py3-none-any.whl) (http://www.lfd.uci.edu/~gohlke/pythonlibs/#scikit-image)
+*upgrade numpy (pip install --upgrade numpy)
+*install scipy (pip install SomePackage-1.0-py2.py3-none-any.whl) (http://www.lfd.uci.edu/~gohlke/pythonlibs)
+*install numpy+mkl (pip install SomePackage-1.0-py2.py3-none-any.whl) (http://www.lfd.uci.edu/~gohlke/pythonlibs)
+*face_landmark_detection.py shape_predictor_68_face_landmarks.dat faces/
+*hell yeah !
