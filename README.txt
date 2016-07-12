@@ -1,3 +1,7 @@
+##DEMO
+	http://codepen.io/anon/pen/BzmRZv
+	this was plotted using an output from the web service I created (with plotly.js)
+
 service accessible via :
 	http://localhost:8000/cgi-bin/upload.py
 
