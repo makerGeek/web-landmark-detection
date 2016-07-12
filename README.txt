@@ -10,3 +10,7 @@ browser:
 
 the get_landmarks.py works as follows:
 	./get_landmarks.py ../tmp
+
+TO DO:
+	the JSON data have been printed manually.
+	to have a better and easier to maintain code, it is better to create custom serializable classes for the face that have as attributes the detected points (check out http://www.diveintopython3.net/serializing.html#json-dump)
