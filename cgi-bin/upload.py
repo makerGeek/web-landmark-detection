@@ -72,13 +72,13 @@ def save_uploaded_file (form_field, upload_dir):
             if not chunk: break
             fout.write (chunk)
         fout.close()
+        global IMAGE_AVAILABLE
+        IMAGE_AVAILABLE=True
     except:
         print "no file !"
 def getDimensions( image ):
     img=cv2.imread(image,0)
     if((img is not None) and img.any()):
-        global IMAGE_AVAILABLE
-        IMAGE_AVAILABLE=True
         # print img
         height, width = img.shape
         dimensions ={'image':image, 'height': height, 'width': width}
