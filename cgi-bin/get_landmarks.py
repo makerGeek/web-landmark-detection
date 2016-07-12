@@ -68,7 +68,7 @@ def get_landmarks(filename):
         predictor = dlib.shape_predictor(predictor_path)
         # win = dlib.image_window()
 
-        print("Processing file: {}".format(img_file))
+        # print("Processing file: {}".format(img_file))
         img = io.imread(img_file)
 
         # win.clear_overlay()
@@ -78,24 +78,87 @@ def get_landmarks(filename):
         # second argument indicates that we should upsample the image 1 time. This
         # will make everything bigger and allow us to detect more faces.
         dets = detector(img, 1)
-        print("Number of faces detected: {}".format(len(dets)))
-        for k, d in enumerate(dets):
-            print("Detection {}: Left: {} Top: {} Right: {} Bottom: {}".format(
-                k, d.left(), d.top(), d.right(), d.bottom()))
-            # Get the landmarks/parts for the face in box d.
-            shape = predictor(img, d)
-            print "---"
-            #print the number of landmark points
-            print shape.num_parts
-            #print the coordinates of each point
-            for i in range(0, shape.num_parts):
-                print ("point {} : {}").format(i,shape.part(i))
-                print "---"
-            # Draw the face landmarks on the screen.
-            # win.add_overlay(shape)
 
-        # win.add_overlay(dets)
-        # dlib.hit_enter_to_continue()
+        #the format of the JSON is as follows:
+        #     {
+        #    "faces_count":2,
+        #    "faces":[
+        #       {
+        #          "parts_count":3,
+        #          "x":[
+        #             1,
+        #             2,
+        #             3
+        #          ],
+        #          "y":[
+        #             98,
+        #             113,
+        #             127
+        #          ]
+        #       },
+        #       {
+        #          "parts_count":3,
+        #          "x":[
+        #             1,
+        #             2,
+        #             3
+        #          ],
+        #          "y":[
+        #             98,
+        #             113,
+        #             127
+        #          ]
+        #       }
+        #    ]
+        # }
+         #beginning JSON {
+        print "{"
+        if(len(dets)==0):
+                print('"faces_count": 0 }')
+        else:
+            print('"faces_count": {}, '.format(len(dets)))
+            #opened faces array [
+            print('"faces":[')
+            #for each face we detected
+            for k, d in enumerate(dets):
+                #beginning of face :
+                print "{"
+                # print("Detection {}: Left: {} Top: {} Right: {} Bottom: {}".format(
+                #     k, d.left(), d.top(), d.right(), d.bottom()))
+                # Get the landmarks/parts for the face in box d.
+                shape = predictor(img, d)
+                #print the number of landmark points
+                print ('"parts_count": {}, '.format(shape.num_parts))
+                #print the x coordinate of each point
+                print '"x" : ['
+                for i in range(0, shape.num_parts):
+                    print (shape.part(i).x)
+                    if(i+1!=shape.num_parts):
+                        print ", "
+                print "], "
+
+                #print the y coordinate of each point
+                print '"y" : ['
+                for i in range(0, shape.num_parts):
+                    print (shape.part(i).y)
+                    if(i+1!=shape.num_parts):
+                        print ", "
+                print "]"
+
+                #end of face
+                print "}"
+                if(k!=len(dets)-1):
+                    print ", "
+                else:
+                    #end of faces array
+                    print "]"
+                # Draw the face landmarks on the screen.
+                # win.add_overlay(shape)
+            #end of all JSON
+            print "}"
+
+            # win.add_overlay(dets)
+            # dlib.hit_enter_to_continue()
     except:
         print "<br>must have argument image"
         print "<br>filename : " + filename

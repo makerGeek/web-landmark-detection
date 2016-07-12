@@ -95,6 +95,6 @@ def delete (image):
 
 save_uploaded_file ("file_1", UPLOAD_DIR)
 print_html_form ()
-getDimensions(IMAGE)
+# getDimensions(IMAGE)
 get_landmarks.get_landmarks(IMAGE)
 delete(IMAGE)
