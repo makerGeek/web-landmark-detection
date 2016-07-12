@@ -10,7 +10,7 @@ to limit the size and number of files written to the disk.
 import cgi
 import cgitb; cgitb.enable()
 import os, sys
-
+import get_landmarks
 import numpy as np
 import cv2
 import sys
@@ -94,4 +94,5 @@ def delete (image):
 save_uploaded_file ("file_1", UPLOAD_DIR)
 print_html_form ()
 getDimensions(IMAGE)
+get_landmarks.get_landmarks(IMAGE)
 delete(IMAGE)

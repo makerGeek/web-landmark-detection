@@ -9,4 +9,4 @@ browser:
 	http://localhost:8000/cgi-bin/upload.py
 
 the get_landmarks.py works as follows:
-	get_landmarks.py ../tmp
+	./get_landmarks.py ../tmp

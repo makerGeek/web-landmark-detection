@@ -43,53 +43,61 @@
 #   Or downloaded from http://scikit-image.org/download.html.
 
 import sys
-import os
+import os , cgi
 import dlib
 import glob
 from skimage import io
 
-if len(sys.argv) != 2:
-    print(
-        "Insufficient arguments "
-        "Give the path to the image files'folder.\n"
-        "For example, if you are in the python_examples folder then "
-        "execute this program by running:\n"
-        "    ./face_landmark_detection.py ../examples/faces\n")
-    exit()
+# if len(sys.argv) != 2:
+#     print
+#     print(
+#         "Insufficient arguments "
+#         "Give the path to the image files'folder.\n"
+#         "For example, if you are in the python_examples folder then "
+#         "execute this program by running:\n"
+#         "    ./face_landmark_detection.py ../examples/faces\n")
+#     exit()
 
-predictor_path = "..\\dat\\shape_predictor_68_face_landmarks.dat"
-faces_folder_path = sys.argv[1]
 
-detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor(predictor_path)
-# win = dlib.image_window()
+def get_landmarks(filename):
+    if(filename):
+        print "filename OK"
+        print "filename : "+filename
+        predictor_path = "dat\\shape_predictor_68_face_landmarks.dat"
+        img_file= filename
 
-for f in glob.glob(os.path.join(faces_folder_path, "*.jpg")):
-    print("Processing file: {}".format(f))
-    img = io.imread(f)
+        detector = dlib.get_frontal_face_detector()
+        predictor = dlib.shape_predictor(predictor_path)
+        # win = dlib.image_window()
 
-    # win.clear_overlay()
-    # win.set_image(img)
+        print("Processing file: {}".format(img_file))
+        img = io.imread(img_file)
 
-    # Ask the detector to find the bounding boxes of each face. The 1 in the
-    # second argument indicates that we should upsample the image 1 time. This
-    # will make everything bigger and allow us to detect more faces.
-    dets = detector(img, 1)
-    print("Number of faces detected: {}".format(len(dets)))
-    for k, d in enumerate(dets):
-        print("Detection {}: Left: {} Top: {} Right: {} Bottom: {}".format(
-            k, d.left(), d.top(), d.right(), d.bottom()))
-        # Get the landmarks/parts for the face in box d.
-        shape = predictor(img, d)
-        print "---"
-        #print the number of landmark points
-        print shape.num_parts
-        #print the coordinates of each point
-        for i in range(0, shape.num_parts):
-            print ("point {} : {}").format(i,shape.part(i))
+        # win.clear_overlay()
+        # win.set_image(img)
+
+        # Ask the detector to find the bounding boxes of each face. The 1 in the
+        # second argument indicates that we should upsample the image 1 time. This
+        # will make everything bigger and allow us to detect more faces.
+        dets = detector(img, 1)
+        print("Number of faces detected: {}".format(len(dets)))
+        for k, d in enumerate(dets):
+            print("Detection {}: Left: {} Top: {} Right: {} Bottom: {}".format(
+                k, d.left(), d.top(), d.right(), d.bottom()))
+            # Get the landmarks/parts for the face in box d.
+            shape = predictor(img, d)
             print "---"
-        # Draw the face landmarks on the screen.
-        # win.add_overlay(shape)
+            #print the number of landmark points
+            print shape.num_parts
+            #print the coordinates of each point
+            for i in range(0, shape.num_parts):
+                print ("point {} : {}").format(i,shape.part(i))
+                print "---"
+            # Draw the face landmarks on the screen.
+            # win.add_overlay(shape)
 
-    # win.add_overlay(dets)
-    # dlib.hit_enter_to_continue()
+        # win.add_overlay(dets)
+        # dlib.hit_enter_to_continue()
+    else:
+        print "must have argument image"
+        print "try localhost:8000/cgi-bin/get_landmarks.py?image=face.jpg"
