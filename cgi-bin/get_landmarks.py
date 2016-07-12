@@ -60,9 +60,7 @@ from skimage import io
 
 
 def get_landmarks(filename):
-    if(filename):
-        print "filename OK"
-        print "filename : "+filename
+    try:
         predictor_path = "dat\\shape_predictor_68_face_landmarks.dat"
         img_file= filename
 
@@ -98,6 +96,10 @@ def get_landmarks(filename):
 
         # win.add_overlay(dets)
         # dlib.hit_enter_to_continue()
+    except:
+        print "<br>must have argument image"
+        print "<br>filename : " + filename
     else:
         print "must have argument image"
-        print "try localhost:8000/cgi-bin/get_landmarks.py?image=face.jpg"
+        print "filename : " + filename
+
