@@ -62,16 +62,18 @@ def save_uploaded_file (form_field, upload_dir):
     if not form.has_key(form_field): return
     fileitem = form[form_field]
     if not fileitem.file: return
-    fout = file (os.path.join(upload_dir, fileitem.filename), 'wb')
-    global IMAGE
-    IMAGE = str(upload_dir)+"\\"+str(fileitem.filename)
+    try:
+        fout = file (os.path.join(upload_dir, fileitem.filename), 'wb')
+        global IMAGE
+        IMAGE = str(upload_dir)+"\\"+str(fileitem.filename)
 
-    while 1:
-        chunk = fileitem.file.read(100000)
-        if not chunk: break
-        fout.write (chunk)
-    fout.close()
-
+        while 1:
+            chunk = fileitem.file.read(100000)
+            if not chunk: break
+            fout.write (chunk)
+        fout.close()
+    except:
+        print "no file !"
 def getDimensions( image ):
     img=cv2.imread(image,0)
     if((img is not None) and img.any()):

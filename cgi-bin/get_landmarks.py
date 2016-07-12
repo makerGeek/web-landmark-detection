@@ -99,7 +99,3 @@ def get_landmarks(filename):
     except:
         print "<br>must have argument image"
         print "<br>filename : " + filename
-    else:
-        print "must have argument image"
-        print "filename : " + filename
-
