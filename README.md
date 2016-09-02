@@ -4,6 +4,9 @@
 	this was plotted using an output from the web service I created (plotted with plotly.js)
 
 ## HOW TO RUN
+resolve dependencies:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; see [dependencies.txt](https://github.com/makerGeek/web-landmark-detection/blob/master/dependencies.txt)
+
 cmd:
 
 	cd /path/to/app/root
