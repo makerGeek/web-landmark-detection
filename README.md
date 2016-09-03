@@ -1,7 +1,12 @@
 # Web Landmark Detector
+facial features detection using Dlib
+
 ## DEMO
+video demo:
+
+[![video demo:](https://img.youtube.com/vi/urxJC8qsTow/0.jpg)](https://www.youtube.com/watch?v=urxJC8qsTow)
+
 	http://codepen.io/anon/pen/BzmRZv
-	this was plotted using an output from the web service I created (plotted with plotly.js)
 
 ## HOW TO RUN
 resolve dependencies:  
